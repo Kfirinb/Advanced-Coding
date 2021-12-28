@@ -79,13 +79,13 @@ Server::Server(int port) throw (const char*) {
 void Server::start(ClientHandler& ch) throw(const char*){
    t = new thread([&ch,this](){
            while(!isStop) {
-                std::cout << "waiting for a client" << std::endl;
+                //std::cout << "waiting for a client" << std::endl;
                 socklen_t clientSize = sizeof(client);
                 int aClient = accept(fileDescriptor, (struct sockaddr *) &client, &clientSize);
                 if (aClient < 0) {
                     throw "accept failure";
                 }
-                std::cout << "Client connected from server" << std::endl;
+                //std::cout << "Client connected from server" << std::endl;
                 ch.handle(aClient);
                 close(aClient);
                 this_thread::sleep_for (chrono::seconds(1));
